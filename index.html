@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Probability Dashboard | NASA Space Apps 2025</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <header id="main-header">
+        <div class="header-logos-row">
+            <img src="img/nasa-logo.png" alt="NASA Logo" class="header-logo left-logo">
+            <img src="img/team-logo.png" alt="Ctrl Shift Elite Logo" class="header-logo right-logo">
+        </div>
+        <div class="header-center">
+            <h1 class="teamname">Ctrl Shift Elite</h1>
+            <h2 class="websitename">Weather Probability Dashboard</h2>
+            <div class="header-desc-row">
+                <p>
+                    Powered by NASA Earth observation data.<br>
+                    <span class="event-tagline">Plan your outdoor activities with confidence—see the odds, not just the averages!</span><br>
+                    <span class="event-highlight">NASA Space Apps Challenge 2025</span>
+                </p>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section class="input-section glass-card">
+            <h2>Choose Location & Date</h2>
+            <form id="search-form">
+                <div class="input-row">
+                    <div class="input-icon-field">
+                        <span class="input-icon">📍</span>
+                        <input type="text" id="location-search" placeholder="Type a place or click on the map" autocomplete="off" list="location-suggestions">
+                        <datalist id="location-suggestions"></datalist>
+                    </div>
+                    <div class="input-icon-field">
+                        <span class="input-icon">📅</span>
+                        <input type="date" id="date-select">
+                    </div>
+                    <button type="submit" id="get-data" class="primary-btn">Get Weather Probabilities</button>
+                </div>
+            </form>
+            <div class="map-glass">
+                <div id="map"></div>
+                <div class="coordinates">
+                    <span>Selected: </span>
+                    <span id="selected-location">None</span>
+                </div>
+            </div>
+        </section>
+        <section class="results-section glass-card">
+            <div class="loading" id="loading" style="display:none;">
+                <div class="loading-spinner"></div>
+                <span>Fetching NASA data...</span>
+            </div>
+            <div class="results" id="results" style="display:none;">
+                <div class="hero-summary">
+                    <div class="hero-icon" id="hero-icon">🌤️</div>
+                    <div>
+                        <h2>🌤️ Your Weather Probability Summary</h2>
+                        <div id="result-summary" class="result-summary"></div>
+                    </div>
+                </div>
+                <div class="probability-cards">
+                    <div class="card weather-card" id="temperature-card">
+                        <div class="card-accent accent-temp"></div>
+                        <h3>☀️ Temperature</h3>
+                        <canvas id="temp-chart"></canvas>
+                        <div class="probabilities">
+                            <p>Very hot: <span id="prob-hot" class="prob-badge hot" title="Chance temperature will be very hot">-</span></p>
+                            <p>Very cold: <span id="prob-cold" class="prob-badge cold" title="Chance temperature will be very cold">-</span></p>
+                        </div>
+                    </div>
+                    <div class="card weather-card" id="precipitation-card">
+                        <div class="card-accent accent-precip"></div>
+                        <h3>🌧️ Precipitation</h3>
+                        <canvas id="precip-chart"></canvas>
+                        <div class="probabilities">
+                            <p>Very wet: <span id="prob-wet" class="prob-badge wet" title="Chance of heavy rain">-</span></p>
+                        </div>
+                    </div>
+                    <div class="card weather-card" id="wind-card">
+                        <div class="card-accent accent-wind"></div>
+                        <h3>💨 Wind</h3>
+                        <canvas id="wind-chart"></canvas>
+                        <div class="probabilities">
+                            <p>Very windy: <span id="prob-windy" class="prob-badge windy" title="Chance of strong winds">-</span></p>
+                        </div>
+                    </div>
+                    <div class="card weather-card" id="comfort-card">
+                        <div class="card-accent accent-comfort"></div>
+                        <h3>😅 Comfort Index</h3>
+                        <canvas id="comfort-chart"></canvas>
+                        <div class="probabilities">
+                            <p>Very uncomfortable: <span id="prob-uncomfortable" class="prob-badge uncomfortable" title="Chance conditions will be uncomfortable">-</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="plan-section">
+                    <h4>📝 Plan Your Day</h4>
+                    <div id="plan-advice">Select a location and date for custom advice.</div>
+                </div>
+                <div class="download-section">
+                    <button id="download-csv" class="secondary-btn">⬇️ Download CSV</button>
+                    <button id="download-json" class="secondary-btn">⬇️ Download JSON</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        Powered by <a href="https://power.larc.nasa.gov/docs/" target="_blank">NASA POWER API</a>
+        | NASA Space Apps Challenge 2025
+        <br>
+        <span class="footer-team">Created by Ctrl Shift Elite</span>
+    </footer>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
